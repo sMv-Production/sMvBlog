@@ -33,6 +33,7 @@ export const Email = async (email, subject, message, fromName = "sMv|Blog") => {
         const result = JSON.parse(responseText);
 
         if (result.status !== "success") {
+            console.log(`Google Apps Script Error: ${result.message}`);
             throw new Error(`Google Apps Script Error: ${result.message}`);
         }
         
