@@ -18,12 +18,18 @@ const app = express();
 connectDB();
 verifyAzureConnection();
 
+// Server setting
+app.set('trust proxy', 1); // Use the number of proxies your server sits behind
+app.get('/ping', (req, res) => {
+  res.status(200).send('success');
+});
+
 app.use(helmet());
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json({ limit: '2mb' })); // Protect against massive JSON injection payloads
 app.use(cookieParser());
 
-// app.set('trust proxy', 1); // Use the number of proxies your server sits behind
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
