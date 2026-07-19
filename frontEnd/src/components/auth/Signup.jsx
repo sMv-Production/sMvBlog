@@ -8,9 +8,17 @@ function Signup() {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [error, setError] = useState("")
+    const [isCooldown, setIsCooldown] = useState(false) // New state for cooldown
 
     const createAccount = async (data) => {
         setError("")
+        setIsCooldown(true) // Disable the button immediately on click
+
+        // Start a 60-second timer to re-enable the button
+        setTimeout(() => {
+            setIsCooldown(false)
+        }, 60000)
+
         try {
             const response = await authService.createAccount(data)
             if (response?.success) {
@@ -39,7 +47,7 @@ function Signup() {
                         Sign In
                     </Link>
                 </p>
-                
+
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
                 <form onSubmit={handleSubmit(createAccount)} className="mt-8">
@@ -96,8 +104,13 @@ function Signup() {
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                         </div>
 
-                        <Button type="submit" className="w-full">
-                            Create Account
+                        {/* Pass the disabled prop to your custom Button component */}
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={isCooldown}
+                        >
+                            {isCooldown ? "Please wait..." : "Create Account"}
                         </Button>
                     </div>
                 </form>
