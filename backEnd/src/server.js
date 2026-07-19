@@ -20,7 +20,7 @@ verifyAzureConnection();
 
 // Server setting
 app.set('trust proxy', 1); // Use the number of proxies your server sits behind
-app.get('/ping', (req, res) => {
+app.get('/ping', cors({ origin: '*' }), (req, res) => {
   res.status(200).send('success');
 });
 
