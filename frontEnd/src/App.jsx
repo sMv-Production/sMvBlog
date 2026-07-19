@@ -11,7 +11,7 @@ function App() {
 
   
   useEffect(() => {
-    fetch('https://smvblog-0ptu.onrender.com/ping')
+    fetch('https://s-mv-blog.vercel.app/ping')
       .then(res => res.text())
       .then(data => console.log(data))
       .catch(err => console.error(err));
