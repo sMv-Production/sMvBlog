@@ -9,6 +9,15 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
+  
+  useEffect(() => {
+    fetch('https://smvblog-0ptu.onrender.com/ping')
+      .then(res => res.text())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }, []); // Empty dependency array ensures it runs exactly once on mount
+  
+  
   useEffect(() => {
     // Keeping logic isolated inside the effect avoids dependency array bloat
     const checkUser = async () => {
