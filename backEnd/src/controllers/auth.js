@@ -61,7 +61,7 @@ export const registerUser = async (req, res, next) => {
             data: { email, password: hashedPassword, name }
         });
         generateOTPCookie(res, email);
-        await emailSender(
+        /*await emailSender(
             email,
             "Verify Your Email Address",
             otpTemplate(
@@ -69,7 +69,7 @@ export const registerUser = async (req, res, next) => {
                 "Thank you for registering with sMv|Blog. Use the OTP below to verify your email address.",
                 otp
             )
-        );
+        );*/
         res.status(201).json({
             success: true,
         });
