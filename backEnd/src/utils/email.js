@@ -2,6 +2,7 @@ import "dotenv/config";
 
 // Added fromName as an optional parameter (defaults to "sMv|Blog")
 export const Email = async (email, subject, message, fromName = "sMv|Blog") => {
+    console.log("We are here chat")
     const googleScriptUrl = process.env.GAS_WEB_APP_URL;
     const authToken = process.env.GAS_AUTH_TOKEN;
 
